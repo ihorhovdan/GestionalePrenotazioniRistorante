@@ -1,0 +1,144 @@
+﻿@model IEnumerable<GestionalePrenotazioniRistorante.Models.Prenotazione>
+
+
+<link rel="stylesheet" href="/css/Index.css">
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome Cliente</th>
+                <th>Numero di Persone</th>
+                <th>Data e Ora</th>
+                <th>Numero di Telefono</th>
+                <th>Email</th>
+                <th>Note</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prenotazione in Model)
+            {
+                <tr>
+                    <td>@prenotazione.PrenotazioneId</td>
+                    <td>@prenotazione.NomeCliente</td>
+                    <td>@prenotazione.NumeroDiPersone</td>
+                    <td>@prenotazione.DataOra</td>
+                    <td>@prenotazione.NumeroTelefono</td>
+                    <td>@prenotazione.Email</td>
+                    <td>@prenotazione.Note</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = prenotazione.PrenotazioneId })" class="icon" title="Dettagli">
+                            <i data-feather="info"></i>
+                        </a>
+                        <a href="@Url.Action("Edit", new { id = prenotazione.PrenotazioneId })" class="icon" title="Modifica">
+                            <i data-feather="edit-2"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = prenotazione.PrenotazioneId })" class="icon" title="Elimina">
+                            <i data-feather="trash-2"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Form per aggiungere una nuova prenotazione -->
+<div class="add-prenotazione-form">
+    <form asp-controller="Home" asp-action="Add" method="post">
+        <h4>Aggiungi una nuova prenotazione</h4>
+        <div>
+            <label for="NomeCliente">Nome Cliente</label>
+            <input type="text" name="NomeCliente" required>
+        </div>
+        <div>
+            <label for="NumeroDiPersone">Numero di Persone</label>
+            <input type="number" name="NumeroDiPersone" required>
+        </div>
+        <div>
+            <label for="DataOra">Data e Ora</label>
+            <input type="datetime-local" name="DataOra" required>
+        </div>
+        <div>
+            <label for="NumeroTelefono">Numero di Telefono</label>
+            <input type="text" name="NumeroTelefono" required>
+        </div>
+        <div>
+            <label for="Email">Email <span class="opzionale">(Opzionale)</span></label>
+            <input type="email" name="Email">
+        </div>
+        <div>
+            <label for="Note">Note <span class="opzionale">(Opzionale)</span></label>
+            <textarea name="Note"></textarea>
+        </div>
+        <button type="submit" class="btn">Aggiungi</button>
+    </form>
+</div>
+
+
+
+<!-- Form per filtrare le prenotazioni -->
+<div class="filter-form" id="filter-form">
+    <form method="get" action="/Home/Filter">
+        <h4>Cerca Prenotazioni</h4>
+        <div class="form-row">
+            <label class="checkbox-container">
+                Nome Cliente
+                <input type="checkbox" id="filterNomeCliente" name="filterNomeCliente" checked="@ViewBag.NomeCliente != null">
+                <span class="checkmark"></span>
+            </label>
+            <input type="text" name="NomeCliente" id="NomeCliente" value="@ViewBag.NomeCliente" disabled="@string.IsNullOrEmpty(ViewBag.NomeCliente?.ToString())">
+        </div>
+        <div class="form-row">
+            <label class="checkbox-container">
+                Data
+                <input type="checkbox" id="filterDataOra" name="filterDataOra" checked="@ViewBag.DataOra != null">
+                <span class="checkmark"></span>
+            </label>
+            <input type="date" name="DataOra" id="DataOra" value="@ViewBag.DataOra?.ToString("yyyy-MM-dd")" disabled="@ViewBag.DataOra == null">
+        </div>
+        <button type="submit" class="btn">Cerca</button>
+        <button type="button" class="btn" id="resetButton">Resetta</button>
+
+    </form>
+</div>
+
+
+<!-- Modale per la modifica -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <span class="close-button" id="closeModal">&times;</span>
+        <h4>Modifica Prenotazione</h4>
+        <form method="post" action="/Home/Edit" id="editForm">
+            <input type="hidden" name="PrenotazioneId" id="editPrenotazioneId">
+            <div>
+                <label for="editNomeCliente">Nome Cliente</label>
+                <input type="text" name="NomeCliente" id="editNomeCliente" required>
+            </div>
+            <div>
+                <label for="editNumeroDiPersone">Numero di Persone</label>
+                <input type="number" name="NumeroDiPersone" id="editNumeroDiPersone" required>
+            </div>
+            <div>
+                <label for="editDataOra">Data e Ora</label>
+                <input type="datetime-local" name="DataOra" id="editDataOra" required>
+            </div>
+            <div>
+                <label for="editNumeroTelefono">Numero di Telefono</label>
+                <input type="text" name="NumeroTelefono" id="editNumeroTelefono" required>
+            </div>
+            <div>
+                <label for="editEmail">Email</label>
+                <input type="email" name="Email" id="editEmail">
+            </div>
+            <div>
+                <label for="editNote">Note</label>
+                <textarea name="Note" id="editNote"></textarea>
+            </div>
+            <button type="submit" class="btn">Salva Modifiche</button>
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿/* Reset dei margini e dei padding */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* Stili base per la navbar */
+.navbar {
+    background-color: #009879;
+    padding: 10px 20px; /* Spaziatura interna */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Ombra leggera per profondità */
+    display: flex;
+    justify-content: space-between; /* Spaziatura tra gli elementi */
+    align-items: center; /* Allineamento verticale degli elementi */
+}
+
+
+
+/* Link della navbar */
+.navbar a {
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 4px; /* Bordi arrotondati per i link */
+}
+
+    /* Effetti al passaggio del mouse */
+    .navbar a:hover, .navbar a:focus {
+        background-color: rgba(255,255,255,0.2);
+        color: #ffffff;
+    }
+
+/* Responsività: stack dei link su dispositivi mobili */
+@media (max-width: 768px) {
+    .navbar-links {
+        display: flex;
+        flex-direction: column; /* Allineamento verticale dei link */
+        align-items: center; /* Centra i link */
+        width: 100%; /* Larghezza completa */
+    }
+
+    .navbar a {
+        text-align: center;
+        padding: 10px; /* Maggiore padding per una migliore area di clic */
+        width: 100%; /* Larghezza completa */
+        box-sizing: border-box; /* Il padding non aumenta la larghezza */
+    }
+}
+
+
+.toggle-filtra {
+    margin-right: 250px;
+}
+
+
+h1 {
+    margin-left: 690px;
+}
+
+
+
+
+/*MODALE*/
+/* Modale - Offuscare lo sfondo */
+.modal {
+    display: none; /* Nasconde il modale di default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Sfondo trasparente */
+}
+
+/* Contenuto del Modale */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Bottone per chiudere il modale */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close-button:hover {
+        color: #000;
+    }

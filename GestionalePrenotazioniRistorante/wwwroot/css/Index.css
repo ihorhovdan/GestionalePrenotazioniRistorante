@@ -1,0 +1,321 @@
+﻿/* Reset del margine e del padding del body per evitare spazi extra */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Stile per il contenitore della tabella, con reset del margine e padding */
+.table-container {
+    width: 48%; /* regola questa percentuale secondo le tue esigenze */
+    float: left; /* allinea il contenitore a sinistra */
+    overflow-x: auto;
+    height: 800px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+/* Stili per la tabella e le celle */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 600px; /* assicurati che la tabella non sia troppo stretta */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+   
+
+    .table thead th {
+        background-color: #009879;
+        color: #ffffff;
+        padding: 12px 15px;
+        position: sticky;
+        top: 0; /* posizione dall'alto della viewport */
+        z-index: 1000; /* si assicura che l'header rimanga sopra agli altri contenuti durante lo scrolling */
+        text-align: left;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 15px;
+    }
+
+    .table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        .table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+
+
+.details {
+    background-color: #4CAF50;
+}
+
+.edit {
+    background-color: #ff9800;
+}
+
+.delete {
+    background-color: #f44336;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+
+ .table .icon {
+        color: #333; /* Colore delle icone */
+        font-size: 18px; /* Dimensione delle icone */
+        padding: 5px;
+        margin: 0 5px;
+        text-decoration: none;
+    }
+
+    .table .icon:hover {
+        color: #007BFF; /* Cambia il colore all'hover */
+    }
+
+    .details i { color: #4CAF50; } /* Colore specifico per Dettagli */
+    .edit i { color: #FFC107; } /* Colore specifico per Modifica */
+    .delete i { color: #F44336; } /* Colore specifico per Elimina */
+
+
+    .icon {
+        display: inline-block;
+        color: #6c757d; /* Colore di base delle icone */
+        transition: transform 0.3s ease; /* Transizione per l'effetto hover */
+        margin: 0 2px; /* Spazio minimo tra le icone */
+        vertical-align: middle; /* Allinea le icone verticalmente */
+    }
+
+    .icon:hover {
+        transform: scale(1.2); /* Ingrandisci l'icona al passaggio del mouse */
+        color: #0056b3; /* Cambia il colore al passaggio del mouse */
+    }
+
+    /* Assicurati che i link non abbiano padding o bordi extra */
+    a.icon {
+        padding: 0;
+        border: none;
+        background: none;
+    }
+
+
+
+/* FORM DI PRENOTAZIONE */
+
+.add-prenotazione-form {
+    max-width: 300px;
+    position: relative;
+    right: 550px;
+    margin-top: 50px;
+    padding: 20px;
+    float: right;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+   
+
+}
+
+
+    .add-prenotazione-form h4 {
+        text-align: center;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .add-prenotazione-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .add-prenotazione-form input,
+    .add-prenotazione-form textarea,
+    .add-prenotazione-form button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .add-prenotazione-form input:focus,
+        .add-prenotazione-form textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+
+    .add-prenotazione-form button {
+        background-color: #009879;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        .add-prenotazione-form button:hover {
+            background-color: #009879;
+        }
+        
+
+    .add-prenotazione-form textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+
+/* FOORM DEI FILTRI */
+.filter-form {
+    padding:  0 10px;
+    float: right;
+    margin-right: -250px;
+    margin-top: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+
+.filter-form h4 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.filter-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+
+.filter-form input,
+.filter-form textarea,
+.filter-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filter-form button {
+    background-color: #009879;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/*CHECK BOX*/
+    /* Stile base per il modulo */
+    .filter-form .form-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .filter-form input[type="text"],
+    .filter-form input[type="date"] {
+        flex: 2;
+        margin-left: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .filter-form .checkbox-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        font-size: 16px;
+        user-select: none;
+        flex: 1;
+        color: #555;
+    }
+
+        .filter-form .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    .filter-form .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #fff; /* Sfondo bianco per le checkbox non selezionate */
+        border: 2px solid #ccc; /* Bordo grigio per visibilità */
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .filter-form .checkbox-container input:hover ~ .checkmark {
+        border-color: #009879; /* Cambia il bordo quando si passa sopra */
+    }
+
+    .filter-form .checkbox-container input:checked ~ .checkmark {
+        background-color: #009879;
+        box-shadow: 0 0 15px rgba(0, 152, 121, 0.6);
+        transform: scale(1.1);
+        border-color: #009879; /* Rimuove il bordo grigio */
+    }
+
+    .filter-form .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .filter-form .checkbox-container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .filter-form .checkbox-container .checkmark:after {
+        left: 7px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+
+    .opzionale {
+        font-weight: normal;
+    }
