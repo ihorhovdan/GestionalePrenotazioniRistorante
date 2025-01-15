@@ -101,10 +101,10 @@ body {
         vertical-align: middle; /* Allinea le icone verticalmente */
     }
 
-    .icon:hover {
-        transform: scale(1.2); /* Ingrandisci l'icona al passaggio del mouse */
-        color: #0056b3; /* Cambia il colore al passaggio del mouse */
-    }
+        .icon:hover {
+            transform: scale(1.2); /* Ingrandisci l'icona al passaggio del mouse */
+            color: #009879!important; /* Cambia il colore al passaggio del mouse */
+        }
 
     /* Assicurati che i link non abbiano padding o bordi extra */
     a.icon {
@@ -319,3 +319,142 @@ body {
     .opzionale {
         font-weight: normal;
     }
+
+
+
+
+
+    /* MODALE MODIFICA PRENOTAZIONE*/
+
+/* Stile per la modale */
+<style >
+.modal {
+    display: none; /* Nascondi la modale di default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Sfondo scuro trasparente */
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    font-family: sans-serif;
+}
+
+.modal.show {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+    .close-button:hover {
+        color: #ff0000;
+    }
+
+.modal-content h4 {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+.modal-content input, .modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+    .modal-content input:focus, .modal-content textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+.modal-content button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #009879;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+  
+
+
+/*MODALE DELETE*/
+.modalDelete {
+    top: 30%;
+    display: flex;
+    flex-direction: column; /* Organizza i figli in colonna */
+    align-items: center;
+}
+
+.TextDelete{
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* Centra i bottoni orizzontalmente nel loro contenitore */
+    width: 100%; /* Prende tutta la larghezza del contenitore padre */
+}
+.btnDelete {
+    margin-top: 20px;
+    margin-right: 20px;
+}

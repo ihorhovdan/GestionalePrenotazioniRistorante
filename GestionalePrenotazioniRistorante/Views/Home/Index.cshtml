@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GestionalePrenotazioniRistorante.Models.Prenotazione>
 
 
-<link rel="stylesheet" href="/css/Index.css">
+
 
 <div class="table-container">
     <table class="table">
@@ -35,9 +35,11 @@
                         <a href="@Url.Action("Edit", new { id = prenotazione.PrenotazioneId })" class="icon" title="Modifica">
                             <i data-feather="edit-2"></i>
                         </a>
-                        <a href="@Url.Action("Delete", new { id = prenotazione.PrenotazioneId })" class="icon" title="Elimina">
+                        <!-- Link di Eliminazione Modificato -->
+                        <a href="javascript:void(0);" onclick="openModal(@prenotazione.PrenotazioneId)" class="icon" title="Elimina">
                             <i data-feather="trash-2"></i>
                         </a>
+
                     </td>
                 </tr>
             }
@@ -73,7 +75,7 @@
             <label for="Note">Note <span class="opzionale">(Opzionale)</span></label>
             <textarea name="Note"></textarea>
         </div>
-        <button type="submit" class="btn">Aggiungi</button>
+        <button type="submit" class="btn add-btn">Aggiungi</button>
     </form>
 </div>
 
@@ -137,8 +139,47 @@
                 <label for="editNote">Note</label>
                 <textarea name="Note" id="editNote"></textarea>
             </div>
-            <button type="submit" class="btn">Salva Modifiche</button>
+            <button type="submit" class="btn edit-btn">Salva Modifiche</button>
         </form>
 
     </div>
 </div>
+
+
+
+
+<!-- Modale di conferma eliminazione -->
+<div id="deleteConfirmationModal" class="modal" style="display:none;">
+    <div class="modal-content modalDelete">
+        <p class="TextDelete">Sei sicuro di voler eliminare questa prenotazione?</p>
+        <div class="button-group">
+            <button id="confirmDelete" class="btnDelete">Sì</button>
+            <button onclick="closeModal()" class="btnDelete">No</button>
+        </div>
+       
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="confirmation-box" id="confirmationBox">
+    <div class="confirmation-checkmark">
+        <svg viewBox="0 0 52 52">
+            <circle cx="26" cy="26" r="25" fill="none" />
+            <path d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+    </div>
+    <div id="confirmationMessage">Prenotazione aggiunta con successo!</div>
+</div>
+
+
+

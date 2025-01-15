@@ -1,0 +1,55 @@
+﻿/* Stili per l'animazione della conferma */
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 50px;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.confirmation-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #009879;
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-size: 1.2em;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.confirmation-checkmark {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
+}
+
+    .confirmation-checkmark svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+        .confirmation-checkmark svg circle {
+            fill: #009879;
+            stroke: #FFF;
+        }
+
+        .confirmation-checkmark svg path {
+            fill: none;
+            stroke: #FFF;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 50px;
+            stroke-dashoffset: 50px;
+        }

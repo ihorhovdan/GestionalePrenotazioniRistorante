@@ -4,11 +4,11 @@
     const inputNomeCliente = document.getElementById('NomeCliente');
     const inputDataOra = document.getElementById('DataOra');
 
-    // Impostazioni iniziali alla carica della pagina
-    filterNomeCliente.checked = true;
-    filterDataOra.checked = false;
-    inputNomeCliente.disabled = false;
-    inputDataOra.disabled = true;
+    // Carica lo stato salvato delle checkbox all'avvio
+    filterNomeCliente.checked = localStorage.getItem('filterNomeCliente') === 'true';
+    filterDataOra.checked = localStorage.getItem('filterDataOra') === 'true';
+    inputNomeCliente.disabled = !filterNomeCliente.checked;
+    inputDataOra.disabled = !filterDataOra.checked;
 
     // Funzione per gestire i cambiamenti delle caselle di controllo
     function handleCheckboxChange() {
@@ -19,12 +19,17 @@
 
         inputNomeCliente.disabled = !filterNomeCliente.checked;
         inputDataOra.disabled = !filterDataOra.checked;
+
+        // Salva lo stato corrente delle checkbox nel localStorage
+        localStorage.setItem('filterNomeCliente', filterNomeCliente.checked);
+        localStorage.setItem('filterDataOra', filterDataOra.checked);
     }
 
     // Aggiungere event listener a entrambe le caselle di controllo
     filterNomeCliente.addEventListener('change', handleCheckboxChange);
     filterDataOra.addEventListener('change', handleCheckboxChange);
 });
+
 
 
 
@@ -41,79 +46,70 @@ document.getElementById('resetButton').addEventListener('click', function() {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const editModal = document.getElementById('editModal'); // Modale
-    const closeModal = document.getElementById('closeModal'); // Bottone per chiudere il modale
-    const editForm = document.getElementById('editForm'); // Form di modifica
+document.querySelectorAll(".icon[title='Modifica']").forEach(button => {
+    button.addEventListener("click", function (event) {
+        event.preventDefault();
 
-    // Funzione per aprire il modale con i dati della prenotazione
-    function openEditModal(prenotazione) {
-        console.log("Dati ricevuti per la prenotazione:", prenotazione); // Debugging dei dati ricevuti
+        // Recupera l'ID della prenotazione
+        const prenotazioneId = this.closest("tr").querySelector("td:first-child").innerText;
 
-        document.getElementById('editPrenotazioneId').value = prenotazione.PrenotazioneId;
-        document.getElementById('editNomeCliente').value = prenotazione.NomeCliente;
-        document.getElementById('editNumeroDiPersone').value = prenotazione.NumeroDiPersone;
+        // Fai una chiamata AJAX per ottenere i dettagli della prenotazione
+        fetch(`/Home/GetPrenotazione?id=${prenotazioneId}`)
+            .then(response => response.json())
+            .then(prenotazione => {
+                // Popola i campi della modale
+                document.getElementById("editPrenotazioneId").value = prenotazione.id;
+                document.getElementById("editNomeCliente").value = prenotazione.nomeCliente;
+                document.getElementById("editNumeroDiPersone").value = prenotazione.numeroDiPersone;
+                document.getElementById("editDataOra").value = prenotazione.dataOra;
+                document.getElementById("editNumeroTelefono").value = prenotazione.numeroTelefono;
+                document.getElementById("editEmail").value = prenotazione.email;
+                document.getElementById("editNote").value = prenotazione.note;
 
-        // Formatta la data per il campo datetime-local
-        const dataOra = prenotazione.DataOra.trim(); // Rimuove spazi indesiderati
-        console.log("Data estratta dalla tabella:", dataOra); // Debugging della data grezza
-
-        const formattedDate = formatDateForInput(dataOra);
-        console.log("Data formattata per il campo datetime-local:", formattedDate); // Debugging della data formattata
-
-        document.getElementById('editDataOra').value = formattedDate;
-
-        document.getElementById('editNumeroTelefono').value = prenotazione.NumeroTelefono;
-        document.getElementById('editEmail').value = prenotazione.Email;
-        document.getElementById('editNote').value = prenotazione.Note;
-
-        // Mostra il modale
-        editModal.style.display = 'block';
-    }
-
-    // Funzione per formattare la data dal formato "DD/MM/YYYY HH:mm:ss" a "YYYY-MM-DDTHH:mm"
-    function formatDateForInput(dataOra) {
-        const [datePart, timePart] = dataOra.split(' '); // Divide la data dall'ora
-        const [day, month, year] = datePart.split('/'); // Estrae giorno, mese, anno
-        const time = timePart.substring(0, 5); // Estrae solo "HH:mm" dalla parte dell'ora
-        return `${year}-${month}-${day}T${time}`; // Riformatta per il datetime-local
-    }
-
-    // Funzione per chiudere il modale
-    closeModal.addEventListener('click', function () {
-        editModal.style.display = 'none';
-    });
-
-    // Chiudi il modale cliccando fuori dal contenuto
-    window.addEventListener('click', function (event) {
-        if (event.target === editModal) {
-            editModal.style.display = 'none';
-        }
-    });
-
-    // Aggiungi event listener ai pulsanti di modifica
-    document.querySelectorAll('.icon[title="Modifica"]').forEach(button => {
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            // Estrarre i dati della prenotazione dalla riga della tabella
-            const prenotazione = {
-                PrenotazioneId: this.getAttribute('href').split('=')[1], // ID estratto dall'URL
-                NomeCliente: this.closest('tr').querySelector('td:nth-child(2)').textContent,
-                NumeroDiPersone: this.closest('tr').querySelector('td:nth-child(3)').textContent,
-                DataOra: this.closest('tr').querySelector('td:nth-child(4)').textContent.trim(), // Assicurati che sia senza spazi
-                NumeroTelefono: this.closest('tr').querySelector('td:nth-child(5)').textContent,
-                Email: this.closest('tr').querySelector('td:nth-child(6)').textContent,
-                Note: this.closest('tr').querySelector('td:nth-child(7)').textContent
-            };
-
-            console.log("Prenotazione estratta dalla tabella:", prenotazione); // Debugging dell'intera prenotazione
-
-            // Aprire il modale con i dati estratti
-            openEditModal(prenotazione);
-        });
+                // Mostra la modale
+                document.getElementById("editModal").style.display = "block";
+            });
     });
 });
+
+// Nascondi la modale quando clicchi sulla X
+document.getElementById("closeModal").addEventListener("click", () => {
+    document.getElementById("editModal").style.display = "none";
+});
+
+
+// Chiudi la modale quando clicchi fuori da essa
+window.addEventListener("click", (event) => {
+    let modal = document.getElementById("editModal");
+    // Verifica se il click è stato effettuato fuori dalla modale
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+
+
+
+
+function openModal(prenotazioneId) {
+    var deleteModal = document.getElementById('deleteConfirmationModal');
+    var confirmButton = document.getElementById('confirmDelete');
+
+    // Assicurati di rimuovere qualsiasi vecchio event listener
+    confirmButton.removeEventListener('click', confirmDelete);
+    confirmButton.addEventListener('click', function () { confirmDelete(prenotazioneId); });
+
+    deleteModal.style.display = 'block';
+}
+
+function confirmDelete(prenotazioneId) {
+    window.location.href = '/Home/Delete/' + prenotazioneId + '?confirm=true';
+}
+
+function closeModal() {
+    document.getElementById('deleteConfirmationModal').style.display = 'none';
+}
+
 
 
 
